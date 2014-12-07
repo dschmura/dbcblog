@@ -10,21 +10,20 @@
       %a.navbar-brand{:href => "#"} DBC Blog
     / Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      -if user_signed_in?
+        %form
+          =link_to "Sign Out", destroy_user_session_path, {class: 'btn btn-primary btn-sm navbar-btn pull-right', method: 'delete'}
+      -else
+        %form
+          =link_to "Sign In", new_user_session_path, {class: 'btn btn-primary btn-sm navbar-btn pull-right', href: new_user_session_path}
       %ul.nav.navbar-nav.pull-right
+
+
         %li.active
           =link_to "Home", root_path
           %span.sr-only (current)
         %li
           %a{:href => "#"} Blog
-        %li.dropdown
-          %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-            Dropdown
-            %span.caret
-          %ul.dropdown-menu{:role => "menu"}
-            -if user_signed_in?
-              %li
-                =link_to "Sign Out", destroy_user_session_path, method: 'delete'
-            -else
-              %li
-                =link_to "Sign In", new_user_session_path
+
+
 
